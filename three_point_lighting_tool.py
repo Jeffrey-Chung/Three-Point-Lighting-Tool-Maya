@@ -16,26 +16,33 @@ def create_plane():
     cmds.setAttr(poly_plane[0] + '.scaleX', 500)
     cmds.setAttr(poly_plane[0] + '.scaleY', 500)
     cmds.setAttr(poly_plane[0] + '.scaleZ', 500)
-    cmds.polyExtrudeFacet( poly_plane[0] + '.e[0:18]', kft = True, ltz = 3000)
+    cmds.polyExtrudeFacet( poly_plane[0] + '.e[0:18]', kft = True, ltz = 3000) #extrude the edges at the end of the plane upwards for lighting
     
 #create the key light based on the object's location
 '''instructions: 1. select the object in the outliner, 2. use the function'''
 def create_key_light(selected_object):
     key_light = mutils.createLocator('aiAreaLight', asLight=True)
-    key_light_shape = key_light[0].split('|aiAreaLight1|')[1]
+    key_light_shape = key_light[0].split('|aiAreaLight1|')[1] #get the key light shape 
+    
+    #denote the distance differences between object and the light position
     light_x_location = cmds.getAttr(selected_object + '.translateX') - 100
     light_y_location = cmds.getAttr(selected_object + '.translateY') + 200
     light_z_location = cmds.getAttr(selected_object + '.translateZ') - 200
     cmds.setAttr(key_light[1] + '.translateX', light_x_location)
     cmds.setAttr(key_light[1] + '.translateY', light_y_location)
     cmds.setAttr(key_light[1] + '.translateZ', light_z_location)
-    cmds.setAttr(key_light[1] + '.rotateX', -45)
+    
+    #adjust the angles of the light to be multiples of 45 degrees
+    cmds.setAttr(key_light[1] + '.rotateX', -45) 
     cmds.setAttr(key_light[1] + '.rotateY', -135)
+    
+    #the scale and intensity might be able to be changed depending on UI, but these are the default settings
     cmds.setAttr(key_light[1] + '.scaleX', 100)
     cmds.setAttr(key_light[1] + '.scaleY', 100)
     cmds.setAttr(key_light[1] + '.scaleZ', 100)
     cmds.setAttr(key_light_shape + '.intensity', 100000)
     
-
-
+    #renaming the area light to key light for convenience
+    cmds.rename(key_light[1], 'keyLight')
+    
 
