@@ -31,9 +31,9 @@ def create_key_light(selected_object):
     key_light_shape = key_light[0].split('|aiAreaLight' + key_light[0][12] + '|')[1] #get the key light shape 
     
     #denote the distance differences between object and the light position
-    light_x_location = cmds.getAttr(selected_object + '.translateX') - 100
-    light_y_location = cmds.getAttr(selected_object + '.translateY') + 200
-    light_z_location = cmds.getAttr(selected_object + '.translateZ') - 200
+    light_x_location = cmds.getAttr(selected_object + '.translateX') - cmds.getAttr(selected_object + '.scaleX') * 100
+    light_y_location = cmds.getAttr(selected_object + '.translateY') + cmds.getAttr(selected_object + '.scaleY') * 200
+    light_z_location = cmds.getAttr(selected_object + '.translateZ') - cmds.getAttr(selected_object + '.scaleZ') * 200
     cmds.setAttr(key_light[1] + '.translateX', light_x_location)
     cmds.setAttr(key_light[1] + '.translateY', light_y_location)
     cmds.setAttr(key_light[1] + '.translateZ', light_z_location)
@@ -43,9 +43,9 @@ def create_key_light(selected_object):
     cmds.setAttr(key_light[1] + '.rotateY', -135)
     
     #the scale and intensity might be able to be changed depending on UI, but these are the default settings
-    cmds.setAttr(key_light[1] + '.scaleX', 100)
-    cmds.setAttr(key_light[1] + '.scaleY', 100)
-    cmds.setAttr(key_light[1] + '.scaleZ', 100)
+    cmds.setAttr(key_light[1] + '.scaleX', cmds.getAttr(selected_object + '.scaleX') * 100)
+    cmds.setAttr(key_light[1] + '.scaleY', cmds.getAttr(selected_object + '.scaleY') * 100)
+    cmds.setAttr(key_light[1] + '.scaleZ', cmds.getAttr(selected_object + '.scaleZ') * 100)
     cmds.setAttr(key_light_shape + '.intensity', 100000)
     
     #renaming the area light to key light for convenience
@@ -59,9 +59,9 @@ def create_fill_light(selected_object):
     fill_light_shape = fill_light[0].split('|aiAreaLight' + fill_light[0][12] + '|')[1] #get the fill light shape 
     
     #denote the distance differences between object and the light position
-    light_x_location = cmds.getAttr(selected_object + '.translateX') + 200
-    light_y_location = cmds.getAttr(selected_object + '.translateY') + 200
-    light_z_location = cmds.getAttr(selected_object + '.translateZ') - 250
+    light_x_location = cmds.getAttr(selected_object + '.translateX') + cmds.getAttr(selected_object + '.scaleX') * 200
+    light_y_location = cmds.getAttr(selected_object + '.translateY') + cmds.getAttr(selected_object + '.scaleY') * 200
+    light_z_location = cmds.getAttr(selected_object + '.translateZ') - cmds.getAttr(selected_object + '.scaleZ') * 250
     cmds.setAttr(fill_light[1] + '.translateX', light_x_location)
     cmds.setAttr(fill_light[1] + '.translateY', light_y_location)
     cmds.setAttr(fill_light[1] + '.translateZ', light_z_location)
@@ -72,9 +72,9 @@ def create_fill_light(selected_object):
     cmds.setAttr(fill_light[1] + '.rotateZ', -45) 
     
     #the scale and intensity might be able to be changed depending on UI, but these are the default settings
-    cmds.setAttr(fill_light[1] + '.scaleX', 100)
-    cmds.setAttr(fill_light[1] + '.scaleY', 100)
-    cmds.setAttr(fill_light[1] + '.scaleZ', 100)
+    cmds.setAttr(fill_light[1] + '.scaleX', cmds.getAttr(selected_object + '.scaleX') * 100)
+    cmds.setAttr(fill_light[1] + '.scaleY', cmds.getAttr(selected_object + '.scaleY') * 100)
+    cmds.setAttr(fill_light[1] + '.scaleZ', cmds.getAttr(selected_object + '.scaleZ') * 100)
     cmds.setAttr(fill_light_shape + '.intensity', 50000)
     
     #renaming the area light to fill light for convenience
@@ -87,9 +87,9 @@ def create_back_light(selected_object):
     back_light_shape = back_light[0].split('|aiAreaLight' + back_light[0][12] + '|')[1] #get the back light shape 
     
     #denote the distance differences between object and the light position
-    light_x_location = cmds.getAttr(selected_object + '.translateX') + 250
-    light_y_location = cmds.getAttr(selected_object + '.translateY') + 45
-    light_z_location = cmds.getAttr(selected_object + '.translateZ') + 400
+    light_x_location = cmds.getAttr(selected_object + '.translateX') + cmds.getAttr(selected_object + '.scaleX') * 250
+    light_y_location = cmds.getAttr(selected_object + '.translateY') + cmds.getAttr(selected_object + '.scaleY') * 45
+    light_z_location = cmds.getAttr(selected_object + '.translateZ') + cmds.getAttr(selected_object + '.scaleZ') * 400
     cmds.setAttr(back_light[1] + '.translateX', light_x_location)
     cmds.setAttr(back_light[1] + '.translateY', light_y_location)
     cmds.setAttr(back_light[1] + '.translateZ', light_z_location)
@@ -100,11 +100,10 @@ def create_back_light(selected_object):
     cmds.setAttr(back_light[1] + '.rotateZ', -100) 
     
     #the scale and intensity might be able to be changed depending on UI, but these are the default settings
-    cmds.setAttr(back_light[1] + '.scaleX', 100)
-    cmds.setAttr(back_light[1] + '.scaleY', 100)
-    cmds.setAttr(back_light[1] + '.scaleZ', 100)
+    cmds.setAttr(back_light[1] + '.scaleX', cmds.getAttr(selected_object + '.scaleX') * 100)
+    cmds.setAttr(back_light[1] + '.scaleY', cmds.getAttr(selected_object + '.scaleY') * 100)
+    cmds.setAttr(back_light[1] + '.scaleZ', cmds.getAttr(selected_object + '.scaleZ') * 100)
     cmds.setAttr(back_light_shape + '.intensity', 25000)
     
     #renaming the area light to back light for convenience
     cmds.rename(back_light[1], 'backLight')
-create_three_point_lighting()
