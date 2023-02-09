@@ -114,8 +114,38 @@ def create_back_light(selected_object):
     back_light_rename = cmds.rename(back_light[1], 'backLight') #output = backLight as string
     return back_light_rename
 
+#class for three point lighting UI
+class ThreePointLightingTool():
+    #setup window and tabs for UI
+    def __init__(self):
+        self.win = cmds.window(title="Three Point Lighting Tool", menuBar=True, widthHeight=(100,100),resizeToFitChildren=True)
+        self.tabs = cmds.tabLayout()
+        self.draw_UI()
+
+    #function to draw the UI itself
+    def draw_UI(self):
+        #first Tab: create three point lighting based on object
+        first_tab = cmds.columnLayout(adjustableColumn = True)
+        cmds.tabLayout(self.tabs, edit=True, tabLabel=[first_tab, 'Set Up Lighting'])
+        cmds.separator(h=10)
+        cmds.text('Set up Plane to add Lighting if Needed', fn='fixedWidthFont') #Description for the plane
+        cmds.text('Note: it will spawn an L shaped plane')
+        cmds.separator(h=20)
+        cmds.button(label = 'Create Plane', command = 'create_plane()')
+        cmds.separator(h=20)
+        
+        cmds.separator(h=20)
+        cmds.text('Add Three Point Lighting Based on Selected Object', fn='fixedWidthFont') #Description for the Three Point Lighting
+        cmds.text('1. Select the object to apply lighting on\n 2. Click on "Add Light" button to apply it on the object')
+        cmds.separator(h=20)
+        cmds.button(label = 'Add Light', command = 'create_three_point_lighting()')
+        cmds.separator(h=20)
+        cmds.setParent("..")
+
+        cmds.showWindow(self.win)
+        
 def main():
-    create_three_point_lighting()
+    ThreePointLightingTool()
 
 if __name__ == "__main__":
     main()
