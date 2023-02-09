@@ -49,7 +49,9 @@ def create_key_light(selected_object):
     cmds.setAttr(key_light_shape + '.intensity', 100000)
     
     #renaming the area light to key light for convenience
-    cmds.rename(key_light[1], 'keyLight')
+    key_light_rename = cmds.rename(key_light[1], 'keyLight') #output = keyLight as string
+    
+    
     
 
 #create the fill light based on the object's location
@@ -78,7 +80,7 @@ def create_fill_light(selected_object):
     cmds.setAttr(fill_light_shape + '.intensity', 50000)
     
     #renaming the area light to fill light for convenience
-    cmds.rename(fill_light[1], 'fillLight')
+    fill_light_rename = cmds.rename(fill_light[1], 'fillLight') #output = fillLight as string
 
 #create the back light based on the object's location
 '''instructions: 1. select the object in the outliner, 2. use the function'''
@@ -106,4 +108,10 @@ def create_back_light(selected_object):
     cmds.setAttr(back_light_shape + '.intensity', 25000)
     
     #renaming the area light to back light for convenience
-    cmds.rename(back_light[1], 'backLight')
+    back_light_rename = cmds.rename(back_light[1], 'backLight') #output = backLight as string
+
+def main():
+    create_three_point_lighting()
+
+if __name__ == "__main__":
+    main()
