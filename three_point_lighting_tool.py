@@ -20,9 +20,10 @@ def create_plane():
     
 def create_three_point_lighting():
     selected_object = get_selected_object()
-    create_key_light(selected_object)
-    create_fill_light(selected_object)
-    create_back_light(selected_object)
+    key_light = create_key_light(selected_object)
+    fill_light = create_fill_light(selected_object)
+    back_light = create_back_light(selected_object)
+    cmds.group(key_light, fill_light, back_light, n='three point lighting on ' + selected_object)
 
 #create the key light based on the object's location
 '''instructions: 1. select the object in the outliner, 2. use the function'''
@@ -50,6 +51,7 @@ def create_key_light(selected_object):
     
     #renaming the area light to key light for convenience
     key_light_rename = cmds.rename(key_light[1], 'keyLight') #output = keyLight as string
+    return key_light_rename
     
     
     
@@ -81,6 +83,7 @@ def create_fill_light(selected_object):
     
     #renaming the area light to fill light for convenience
     fill_light_rename = cmds.rename(fill_light[1], 'fillLight') #output = fillLight as string
+    return fill_light_rename
 
 #create the back light based on the object's location
 '''instructions: 1. select the object in the outliner, 2. use the function'''
@@ -109,6 +112,7 @@ def create_back_light(selected_object):
     
     #renaming the area light to back light for convenience
     back_light_rename = cmds.rename(back_light[1], 'backLight') #output = backLight as string
+    return back_light_rename
 
 def main():
     create_three_point_lighting()
