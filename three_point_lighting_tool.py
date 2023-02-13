@@ -151,7 +151,8 @@ class ThreePointLightingTool():
     def set_colour(self, *args):
         menu_value = get_option_menu_value(self.change_colour_option_menu)
         selected_colour_index = light_colours.index(menu_value)
-        cmds.setAttr(get_selected_object() + '.color', rgb_values[selected_colour_index][0], rgb_values[selected_colour_index][1], rgb_values[selected_colour_index][2], type = 'double3')
+        if 'backLight' in get_selected_object():
+            cmds.setAttr(get_selected_object() + '.color', rgb_values[selected_colour_index][0], rgb_values[selected_colour_index][1], rgb_values[selected_colour_index][2], type = 'double3')
 
     #function to draw the UI itself
     def draw_UI(self):
