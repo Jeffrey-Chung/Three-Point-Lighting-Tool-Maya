@@ -23,7 +23,6 @@ rgb_values = [
     [1, 0.5, 0],
     [1, 0, 1]
 ]
-colour_options = [light_colours, rgb_values]
 #get selected object to apply lighting
 def get_selected_object():
     for selected_object in cmds.ls(sl=True):
