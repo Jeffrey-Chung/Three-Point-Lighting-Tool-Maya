@@ -150,10 +150,10 @@ class ThreePointLightingTool():
     def set_colour(self, *args):
         menu_value = get_option_menu_value(self.change_colour_option_menu)
         selected_colour_index = light_colours.index(menu_value)
-        if 'backLight' in get_selected_object():
+        if 'backLight' in get_selected_object() and get_selected_object() is not None:
             cmds.setAttr(get_selected_object() + '.color', rgb_values[selected_colour_index][0], rgb_values[selected_colour_index][1], rgb_values[selected_colour_index][2], type = 'double3')
-        else:
-            raise Exception("You need to choose a back light to change its colour")
+            return
+        raise Exception("You need to choose a back light to change its colour")
 
     #function to draw the UI itself
     def draw_UI(self):
