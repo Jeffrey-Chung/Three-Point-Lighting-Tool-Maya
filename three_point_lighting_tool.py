@@ -14,14 +14,14 @@ light_colours = [
     'Orange',
     'Pink']
 rgb_values = [
-    [1, 0, 0],
-    [0, 1, 0],
-    [0, 0, 1],
-    [1, 0.1, 0.1],
-    [0.5, 1, 0.1],
-    [0.7, 1, 1],
-    [1, 0.5, 0],
-    [1, 0, 1]
+    [1, 0, 0], #Red
+    [0, 1, 0], #Green
+    [0, 0, 1], #Blue
+    [1, 0.1, 0.1], #Bright Red
+    [0.5, 1, 0.1], #Bright Green
+    [0.7, 1, 1], #Bright Blue
+    [1, 0.5, 0], #Orange
+    [1, 0, 1] #Pink
 ]
 #get selected object to apply lighting
 def get_selected_object():
