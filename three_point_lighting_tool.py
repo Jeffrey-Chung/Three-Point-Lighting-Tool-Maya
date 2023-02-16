@@ -3,7 +3,7 @@
 
 import maya.cmds as cmds
 import mtoa.utils as mutils
-
+#test comment
 light_colours = [
     'Red',
     'Green',
