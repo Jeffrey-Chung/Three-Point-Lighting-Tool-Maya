@@ -56,6 +56,7 @@ Source: https://www.masterclass.com/articles/what-is-three-point-lighting-learn-
     <td>(1, 0, 1)</td>
   </tr>
 </table>
+
    1. Select your back light in the outliner
    2. Select your colour in the dropdown menu
    3. Confirm your settings by clicking on the 'Confirm Colour' button
