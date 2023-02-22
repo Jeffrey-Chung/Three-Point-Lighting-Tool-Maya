@@ -1,7 +1,7 @@
 # Three-Point-Lighting-Tool-Maya
  Creates a Three Point Lighting System on a Selected Object
 
-Three-Point Lighting: "Three-point lighting is the standard form of professional lighting in video production and still photography. It involves using three light sources placed in three different positions."
+Three-Point Lighting: "Three-point lighting is the standard form of professional lighting in video production and still photography. It involves using three light sources placed in three different positions. It is a traditional method for illuminating a subject in a scene with light sources from three distinct positions."
 
     Key Light: The primary and brightest light source of the three lights. Placed typically slightly off the side of the camera at 45 degrees and the front of the object. 
     Fill Light: Mirrors the key light opposite of the camera. It fills in the shadows of the key light to the object. Typically darker than the key light.
