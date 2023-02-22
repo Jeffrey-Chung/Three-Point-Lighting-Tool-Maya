@@ -61,3 +61,5 @@ Source: https://www.masterclass.com/articles/what-is-three-point-lighting-learn-
    2. Select your colour in the dropdown menu
    3. Confirm your settings by clicking on the 'Confirm Colour' button
    NOTE: It will raise an error if you chose another object that is not a back light
+
+testScene_v001.mb is used as a testing scene to muck around with the tool. Feel free to use other scenes on Maya if you want.
