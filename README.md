@@ -18,14 +18,44 @@ Source: https://www.masterclass.com/articles/what-is-three-point-lighting-learn-
    NOTE: Scale of the light will be dependent on the scale of the object.
 - Change the Colour of the Back Light:
    The back light can be changed to any of these colours:
-   - Red (1, 0, 0)
-   - Blue (0, 1, 0)
-   - Green (0, 0, 1)
-   - Bright Red (1, 0.1, 0.1)
-   - Bright Green (0.5, 1, 0.1)
-   - Bright Blue (0.7, 1, 1)
-   - Orange (1, 0.5, 0)
-   - Pink (1, 0, 1)
+   <table>
+  <tr>
+    <th>Colour</th>
+    <th>RGB Value</th>
+  </tr>
+  <tr>
+    <td>Red</td>
+    <td>(1, 0, 0)</td>
+  </tr>
+  <tr>
+    <td>Blue</td>
+    <td>(0, 1, 0)</td>
+  </tr>
+   <tr>
+    <td>Green</td>
+    <td>(0, 0, 1)</td>
+  </tr>
+  <tr>
+    <td>Bright Red</td>
+    <td>(1, 0.1, 0.1)</td>
+  </tr>
+  <tr>
+    <td>Bright Green</td>
+    <td>(0.5, 1, 0.1)</td>
+  </tr>
+  <tr>
+    <td>Bright Blue</td>
+    <td>(0.7, 1, 1)</td>
+  </tr>
+  <tr>
+    <td>Orange</td>
+    <td>(1, 0.5, 0)</td>
+  </tr>
+  <tr>
+    <td>Pink</td>
+    <td>(1, 0, 1)</td>
+  </tr>
+</table>
    1. Select your back light in the outliner
    2. Select your colour in the dropdown menu
    3. Confirm your settings by clicking on the 'Confirm Colour' button
