@@ -10,7 +10,7 @@ Three-Point Lighting: "Three-point lighting is the standard form of professional
 Source: https://www.masterclass.com/articles/what-is-three-point-lighting-learn-about-the-lighting-technique-and-tips-for-the-best-three-point-lighting-setups 
 
 # Functionality:
-MAKE SURE YOU RUN FROM THE "three-point-lighting-tool.py" script 
+<b>MAKE SURE YOU RUN FROM THE "three-point-lighting-tool.py" script </b>
 - Create a default L-shaped plane for the light to reflect
    1. Simply click on the 'Create Plane' button to create the default plane on your scene. Scale is set to 500 * 500 * 500 by default.
 - Create Three Point Lighting on the Selected Object
