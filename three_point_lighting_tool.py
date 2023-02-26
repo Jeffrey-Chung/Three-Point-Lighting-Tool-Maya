@@ -8,6 +8,7 @@ from maya import OpenMayaUI as omui
 import maya.cmds as cmds
 import mtoa.utils as mutils
 
+#Colours to choose to change back light
 light_colours = [
     'Red',
     'Green',
@@ -17,6 +18,8 @@ light_colours = [
     'Bright Blue',
     'Orange',
     'Pink']
+
+#RGB values of said colours
 rgb_values = [
     [1, 0, 0], #Red
     [0, 1, 0], #Green
@@ -38,9 +41,6 @@ def get_option_menu_value(option_menu):
     menu_value = cmds.optionMenu(option_menu, q=True, value=True)
     return menu_value 
             
-
-    
-
 
 #create the key light based on the object's location
 '''instructions: 1. select the object in the outliner, 2. use the function'''
@@ -137,69 +137,12 @@ def getMayaWindow():
     return mayaMainWindow
 
 #class for three point lighting UI
-class ThreePointLightingTool():
-    #setup window and tabs for UI
-    def __init__(self):
-        self.win = cmds.window(title="Three Point Lighting Tool", menuBar=True, widthHeight=(100,100),resizeToFitChildren=True)
-        self.tabs = cmds.tabLayout()
-        self.draw_UI()
-    
-    #Set the focal length of the camera via the confirm focal length button
-    def set_colour(self, *args):
-        menu_value = get_option_menu_value(self.change_colour_option_menu)
-        selected_colour_index = light_colours.index(menu_value)
-        if 'backLight' in get_selected_object() and get_selected_object() is not None:
-            cmds.setAttr(get_selected_object() + '.color', rgb_values[selected_colour_index][0], rgb_values[selected_colour_index][1], rgb_values[selected_colour_index][2], type = 'double3')
-            return
-        raise Exception("You need to choose a back light to change its colour")
-
-    #function to draw the UI itself
-    def draw_UI(self):
-        #first Tab: create three point lighting based on object
-        first_tab = cmds.columnLayout(adjustableColumn = True)
-        cmds.tabLayout(self.tabs, edit=True, tabLabel=[first_tab, 'Set Up Lighting'])
-        cmds.separator(h=10)
-        cmds.text('Set up Plane to add Lighting if Needed', fn='fixedWidthFont') #Description for the plane
-        cmds.text('Note: it will spawn an L shaped plane')
-        cmds.separator(h=20)
-        cmds.button(label = 'Create Plane', command = 'create_plane()')
-        cmds.separator(h=20)
-        
-        cmds.separator(h=20)
-        cmds.text('Add Three Point Lighting Based on Selected Object', fn='fixedWidthFont') #Description for the Three Point Lighting
-        cmds.text('1. Select the object to apply lighting on\n 2. Click on "Add Light" button to apply it on the object')
-        cmds.separator(h=20)
-        cmds.button(label = 'Add Light', command = 'create_three_point_lighting()')
-        cmds.separator(h=20)
-        cmds.setParent("..")
-
-        #second Tab: Modify Three point light options
-        second_tab = cmds.columnLayout(adjustableColumn = True)
-        cmds.tabLayout(self.tabs, edit=True, tabLabel=[second_tab, 'Modify Lighting'])
-        cmds.separator(h=10)
-        cmds.text('Change Colour of Back Light', fn='fixedWidthFont') #Description to change colour of back light
-        cmds.text('1. Select your back light in the outliner \n 2. Select your colour in the dropdown menu \n 3. Confirm your settings by clicking on the Confirm Colour Button\n')
-        self.change_colour_option_menu = cmds.optionMenu(w = 250, label = "Change Colour")
-        #add menu item for all values
-        cmds.menuItem(label = "Red")
-        cmds.menuItem(label = "Blue")
-        cmds.menuItem(label = "Bright Red")
-        cmds.menuItem(label = "Bright Green")
-        cmds.menuItem(label = "Bright Blue")
-        cmds.menuItem(label = "Orange")
-        cmds.menuItem(label = "Pink")
-        cmds.separator(h=20)
-        cmds.button(label = "Confirm Colour" , command=self.set_colour)
-        cmds.setParent("..")
-
-        cmds.showWindow(self.win)
- 
-class TabExample(QMainWindow):
+class ThreePointLightingTool(QMainWindow):
     def __init__(self, parent = None):
-        super(TabExample, self).__init__(parent)
-
+        super(ThreePointLightingTool, self).__init__(parent)
+        #set name of the UI
         self.setWindowTitle("Three Point Lighting Tool")
-
+        #Initiate tabs for UI
         tab = QTabWidget()
 
         #first Tab: create three point lighting based on object
@@ -247,7 +190,7 @@ class TabExample(QMainWindow):
         change_colour_text.setFont(second_tab_header_font)
         second_tab_layout.addWidget(change_colour_text)
 
-        change_colour_instructions = QLabel(' 1. Select your back light in the outliner \n 2. Select your colour in the dropdown menu \n 3. Confirm your settings by clicking on the Confirm Colour Button\n')
+        change_colour_instructions = QLabel(' 1. Select your back light from a three point lighting group in the outliner \n 2. Select your colour in the dropdown menu \n')
         change_colour_instructions.setFont(QFont('Arial', 15))
         second_tab_layout.addWidget(change_colour_instructions)
 
@@ -256,8 +199,7 @@ class TabExample(QMainWindow):
         self.colour_dropbox.activated.connect(self.set_colour)
         second_tab_layout.addWidget(self.colour_dropbox)
         
-        
-
+        #Add all the tabs and name them respectively
         tab.addTab(first_tab, "Set Up Lighting")
         tab.addTab(second_tab, "Modify Lighting")
 
@@ -289,5 +231,4 @@ class TabExample(QMainWindow):
         raise Exception("You need to choose a back light to change its colour")
         
 if __name__ == "__main__":
-    #ThreePointLightingTool()
-    tabWindow = TabExample(parent=getMayaWindow())
+    tabWindow = ThreePointLightingTool(parent=getMayaWindow())
