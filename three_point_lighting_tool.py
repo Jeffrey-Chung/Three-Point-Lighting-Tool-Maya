@@ -1,6 +1,10 @@
 #Three Point Lighting Tool
 #This tool creates a three point lighting system for a selected object and can adjust light settings
-
+from PySide2.QtCore import *
+from PySide2.QtWidgets import *
+from PySide2.QtGui import *
+from shiboken2 import wrapInstance
+from maya import OpenMayaUI as omui
 import maya.cmds as cmds
 import mtoa.utils as mutils
 
@@ -138,6 +142,11 @@ def create_back_light(selected_object):
     back_light_rename = cmds.rename(back_light[1], 'backLight') #output = backLight as string
     return back_light_rename
 
+def getMayaWindow():
+    mayaMainWindowPtr = omui.MQtUtil.mainWindow()
+    mayaMainWindow = wrapInstance(int(mayaMainWindowPtr), QWidget)
+    return mayaMainWindow
+
 #class for three point lighting UI
 class ThreePointLightingTool():
     #setup window and tabs for UI
@@ -195,9 +204,60 @@ class ThreePointLightingTool():
         cmds.setParent("..")
 
         cmds.showWindow(self.win)
+ 
+class TabExample(QMainWindow):
+    def __init__(self, parent = None):
+        super(TabExample, self).__init__(parent)
+
+        self.setWindowTitle("Three Point Lighting Tool")
+
+        tab = QTabWidget()
+
+        #first Tab: create three point lighting based on object
+        first_tab = QWidget()
+        first_tab_layout = QVBoxLayout()
+        first_tab.setLayout(first_tab_layout)
         
-def main():
-    ThreePointLightingTool()
+        #create plane section
+        create_plane_text = QLabel("Set up Plane to add Lighting if Needed")
+        header_font=QFont('Arial', 15)
+        header_font.setBold(True)
+        create_plane_text.setFont(header_font)
+        first_tab_layout.addWidget(create_plane_text)
+
+        create_plane_note = QLabel("Note: it will spawn an L shaped plane")
+        note_font = QFont()
+        note_font.setItalic(True)
+        create_plane_note.setFont(note_font)
+        first_tab_layout.addWidget(create_plane_note)
+
+        create_plane_button = QPushButton("Create Plane")
+        first_tab_layout.addWidget(create_plane_button)
+        
+        #add light section
+        add_light_text = QLabel("Add Three Point Lighting Based on Selected Object")
+        add_light_text.setFont(header_font)
+        first_tab_layout.addWidget(add_light_text)
+
+        add_light_instructions = QLabel(' 1. Select your back light in the outliner\n 2. Select your colour in the dropdown menu\n 3. Confirm your settings by clicking on the Confirm Colour Button\n')
+        first_tab_layout.addWidget(add_light_instructions)
+        add_light_button = QPushButton("Add Light")
+        first_tab_layout.addWidget(add_light_button)
+        
+        second_tab = QWidget()
+        second_tab_layout = QVBoxLayout()
+        second_tab.setLayout(second_tab_layout)
+        button1 = QPushButton("Hi")
+        second_tab_layout.addWidget(button1)
+        
+
+        tab.addTab(first_tab, "Set Up Lighting")
+        tab.addTab(second_tab, "Modify Lighting")
+
+        self.setCentralWidget(tab)
+        self.show()
+       
 
 if __name__ == "__main__":
-    main()
+    #ThreePointLightingTool()
+    tabWindow = TabExample(parent=getMayaWindow())
