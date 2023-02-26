@@ -10,6 +10,7 @@ Three-Point Lighting: "Three-point lighting is the standard form of professional
 Source: https://www.masterclass.com/articles/what-is-three-point-lighting-learn-about-the-lighting-technique-and-tips-for-the-best-three-point-lighting-setups 
 
 # Functionality:
+<b>MAKE SURE YOU RUN FROM THE "three-point-lighting-tool.py" SCRIPT </b>
 - Create a default L-shaped plane for the light to reflect
    1. Simply click on the 'Create Plane' button to create the default plane on your scene. Scale is set to 500 * 500 * 500 by default.
 - Create Three Point Lighting on the Selected Object
@@ -59,7 +60,8 @@ Source: https://www.masterclass.com/articles/what-is-three-point-lighting-learn-
 
    1. Select your back light in the outliner
    2. Select your colour in the dropdown menu
-   3. Confirm your settings by clicking on the 'Confirm Colour' button
-   NOTE: It will raise an error if you chose another object that is not a back light
+   NOTE: It will raise an error if you chose another object that is not a back light. 
 
 testScene_v001.mb is used as a testing scene to muck around with the tool. Feel free to use other scenes on Maya if you want.
+
+Base Layout for pyQT update: https://discourse.techart.online/t/how-to-create-tabs-in-pyside2-maya/10079/2
