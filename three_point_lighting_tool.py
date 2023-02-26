@@ -38,20 +38,9 @@ def get_option_menu_value(option_menu):
     menu_value = cmds.optionMenu(option_menu, q=True, value=True)
     return menu_value 
             
-#create a default 90 degree shaped plane in case if a plane isn't already created in the scene
-def create_plane():
-    poly_plane = cmds.polyPlane(w=10, h=10 )
-    cmds.setAttr(poly_plane[0] + '.scaleX', 500)
-    cmds.setAttr(poly_plane[0] + '.scaleY', 500)
-    cmds.setAttr(poly_plane[0] + '.scaleZ', 500)
-    cmds.polyExtrudeFacet( poly_plane[0] + '.e[0:18]', kft = True, ltz = 3000) #extrude the edges at the end of the plane upwards for lighting
+
     
-def create_three_point_lighting():
-    selected_object = get_selected_object()
-    key_light = create_key_light(selected_object)
-    fill_light = create_fill_light(selected_object)
-    back_light = create_back_light(selected_object)
-    cmds.group(key_light, fill_light, back_light, n='three point lighting on ' + selected_object)
+
 
 #create the key light based on the object's location
 '''instructions: 1. select the object in the outliner, 2. use the function'''
@@ -232,6 +221,7 @@ class TabExample(QMainWindow):
         first_tab_layout.addWidget(create_plane_note)
 
         create_plane_button = QPushButton("Create Plane")
+        create_plane_button.clicked.connect(self.create_plane)
         first_tab_layout.addWidget(create_plane_button)
         
         #add light section
@@ -239,9 +229,10 @@ class TabExample(QMainWindow):
         add_light_text.setFont(header_font)
         first_tab_layout.addWidget(add_light_text)
 
-        add_light_instructions = QLabel(' 1. Select your back light in the outliner\n 2. Select your colour in the dropdown menu\n 3. Confirm your settings by clicking on the Confirm Colour Button\n')
+        add_light_instructions = QLabel(' 1. Select the object to apply lighting on\n 2. Click on "Add Light" button to apply it on the object')
         first_tab_layout.addWidget(add_light_instructions)
         add_light_button = QPushButton("Add Light")
+        add_light_button.clicked.connect(self.create_three_point_lighting)
         first_tab_layout.addWidget(add_light_button)
         
         second_tab = QWidget()
@@ -256,6 +247,24 @@ class TabExample(QMainWindow):
 
         self.setCentralWidget(tab)
         self.show()
+    
+    #create a default 90 degree shaped plane in case if a plane isn't already created in the scene
+    def create_plane(self):
+        poly_plane = cmds.polyPlane(w=10, h=10 )
+        cmds.setAttr(poly_plane[0] + '.scaleX', 500)
+        cmds.setAttr(poly_plane[0] + '.scaleY', 500)
+        cmds.setAttr(poly_plane[0] + '.scaleZ', 500)
+        cmds.polyExtrudeFacet( poly_plane[0] + '.e[0:18]', kft = True, ltz = 3000) #extrude the edges at the end of the plane upwards for lighting
+    
+    #creates a three point lighting system based on the selected object
+    def create_three_point_lighting(self):
+        selected_object = get_selected_object()
+        key_light = create_key_light(selected_object)
+        fill_light = create_fill_light(selected_object)
+        back_light = create_back_light(selected_object)
+        cmds.group(key_light, fill_light, back_light, n='three point lighting on ' + selected_object)
+        
+    
        
 
 if __name__ == "__main__":
