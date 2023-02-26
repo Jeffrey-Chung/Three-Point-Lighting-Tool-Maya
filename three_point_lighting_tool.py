@@ -235,11 +235,27 @@ class TabExample(QMainWindow):
         add_light_button.clicked.connect(self.create_three_point_lighting)
         first_tab_layout.addWidget(add_light_button)
         
+        #second Tab: Modify Three point light options
         second_tab = QWidget()
         second_tab_layout = QVBoxLayout()
         second_tab.setLayout(second_tab_layout)
-        button1 = QPushButton("Hi")
-        second_tab_layout.addWidget(button1)
+        
+        #Change Colour of Back Light
+        change_colour_text = QLabel("Change Colour of Back Light")
+        second_tab_header_font=QFont('Arial', 20)
+        second_tab_header_font.setBold(True)
+        change_colour_text.setFont(second_tab_header_font)
+        second_tab_layout.addWidget(change_colour_text)
+
+        change_colour_instructions = QLabel(' 1. Select your back light in the outliner \n 2. Select your colour in the dropdown menu \n 3. Confirm your settings by clicking on the Confirm Colour Button\n')
+        change_colour_instructions.setFont(QFont('Arial', 15))
+        second_tab_layout.addWidget(change_colour_instructions)
+
+        self.colour_dropbox = QComboBox()
+        self.colour_dropbox.addItems(light_colours)
+        self.colour_dropbox.activated.connect(self.set_colour)
+        second_tab_layout.addWidget(self.colour_dropbox)
+        
         
 
         tab.addTab(first_tab, "Set Up Lighting")
@@ -263,10 +279,15 @@ class TabExample(QMainWindow):
         fill_light = create_fill_light(selected_object)
         back_light = create_back_light(selected_object)
         cmds.group(key_light, fill_light, back_light, n='three point lighting on ' + selected_object)
-        
     
-       
-
+    #Set the focal length of the camera via the confirm focal length button
+    def set_colour(self, index):
+        selected_colour_index = self.colour_dropbox.currentIndex()
+        if 'backLight' in get_selected_object() and get_selected_object() is not None:
+            cmds.setAttr(get_selected_object() + '.color', rgb_values[selected_colour_index][0], rgb_values[selected_colour_index][1], rgb_values[selected_colour_index][2], type = 'double3')
+            return
+        raise Exception("You need to choose a back light to change its colour")
+        
 if __name__ == "__main__":
     #ThreePointLightingTool()
     tabWindow = TabExample(parent=getMayaWindow())
