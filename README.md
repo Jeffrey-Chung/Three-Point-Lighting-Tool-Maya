@@ -64,4 +64,4 @@ Source: https://www.masterclass.com/articles/what-is-three-point-lighting-learn-
 
 testScene_v001.mb is used as a testing scene to muck around with the tool. Feel free to use other scenes on Maya if you want.
 
-Base Layout for pyQT update: https://discourse.techart.online/t/how-to-create-tabs-in-pyside2-maya/10079/2
+Base Layout for pySide update: https://discourse.techart.online/t/how-to-create-tabs-in-pyside2-maya/10079/2
