@@ -131,10 +131,17 @@ def create_back_light(selected_object):
     back_light_rename = cmds.rename(back_light[1], 'backLight') #output = backLight as string
     return back_light_rename
 
-def getMayaWindow():
-    mayaMainWindowPtr = omui.MQtUtil.mainWindow()
-    mayaMainWindow = wrapInstance(int(mayaMainWindowPtr), QWidget)
-    return mayaMainWindow
+def get_maya_window():
+    maya_main_window_ptr = omui.MQtUtil.mainWindow()
+    maya_main_window = wrapInstance(int(maya_main_window_ptr), QWidget)
+    return maya_main_window
+
+#Common method to raise exception error if no object is selected
+def raise_none_object_error():
+    if get_selected_object() is None:
+        raise Exception("Make sure you select an object before you apply lighting")
+        return
+
 
 #class for three point lighting UI
 class ThreePointLightingTool(QMainWindow):
@@ -217,6 +224,7 @@ class ThreePointLightingTool(QMainWindow):
     #creates a three point lighting system based on the selected object
     def create_three_point_lighting(self):
         selected_object = get_selected_object()
+        raise_none_object_error()
         key_light = create_key_light(selected_object)
         fill_light = create_fill_light(selected_object)
         back_light = create_back_light(selected_object)
@@ -231,4 +239,4 @@ class ThreePointLightingTool(QMainWindow):
         raise Exception("You need to choose a back light to change its colour")
         
 if __name__ == "__main__":
-    tabWindow = ThreePointLightingTool(parent=getMayaWindow())
+    tab_window = ThreePointLightingTool(parent=get_maya_window())
