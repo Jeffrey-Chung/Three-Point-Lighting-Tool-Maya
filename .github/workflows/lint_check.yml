@@ -1,0 +1,29 @@
+name: PR Check
+on:
+  pull_request:
+  
+  workflow_dispatch: 
+
+jobs:
+  linting_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repo
+        uses: actions/checkout@v3
+      
+      - name: Setting up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.2'
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pylint
+      
+      # Ingores import-error and wildcard-import since importing works perfectly fine for Maya
+      # Ignores undefined variables since it can't identify PyQT functions
+      # Ignores W0511 warning to fix R0914 and R0915 at another date
+      # For other warnings that needs to be disabled, check the comments in the code
+      - name: Run Linting checks for three_point_lighting_tool.py
+        run: pylint -d E0602 -d E0401 -d W0401 -d R0914 -d R0915 -d C0301 three_point_lighting_tool.py
